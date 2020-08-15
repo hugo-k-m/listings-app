@@ -6,6 +6,8 @@ services:
       - listings-service-db
     environment:
       - DB_URI=${LISTINGS_DB_URI}
+    ports:
+      - ${LISTINGS_SERVICE_PORT}
     volumes:
       - ./listings-service:/opt/app
 
@@ -23,6 +25,8 @@ services:
       - users-service-db
     environment:
       - DB_URI=${USERS_DB_URI}
+    ports:
+      - ${USERS_SERVICE_PORT}
     volumes:
       - ./users-service:/opt/app
 
