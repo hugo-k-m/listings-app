@@ -1,1 +1,3 @@
-console.log("working");
+import "@babel/polyfill";
+
+import "#root/server/startServer";
