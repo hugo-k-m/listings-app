@@ -16,7 +16,7 @@ module.exports.up = (queryInterface, DataTypes) => {
         type: DataTypes.UUID,
       },
       expiresAt: {
-        alloowNull: false,
+        allowNull: false,
         type: DataTypes.DATE,
       },
       createdAt: {
