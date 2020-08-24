@@ -1,7 +1,10 @@
+import "@babel/polyfill";
 import React from "react";
+import { ApolloProvider } from "@apollo/client";
 import { render } from "react-dom";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 
+import graphqlClient from "#root/api/graphqlClient";
 import Root from "#root/components/Root";
 
 import * as theme from "./theme";
@@ -22,9 +25,11 @@ body {
 `;
 
 render(
-  <ThemeProvider theme={theme}>
-    <GlobalStyle />
-    <Root />
-  </ThemeProvider>,
+  <ApolloProvider client={graphqlClient}>
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <Root />
+    </ThemeProvider>
+  </ApolloProvider>,
   document.getElementById("app")
 );
