@@ -1,10 +1,12 @@
 import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import React from "react";
+import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 
 import TextInput from "#root/components/shared/TextInput";
+import { setSession } from "#root/store/ducks/session";
 
 const Label = styled.label`
   display: block;
@@ -38,7 +40,9 @@ const mutation = gql`
 `;
 
 const Login = () => {
+  const dispatch = useDispatch();
   const [createUserSession] = useMutation(mutation);
+
   const {
     formState: { isSubmitting },
     handleSubmit,
@@ -46,11 +50,13 @@ const Login = () => {
   } = useForm();
 
   const onSubmit = handleSubmit(async ({ email, password }) => {
-    const result = await createUserSession({
+    const {
+      data: { createUserSession: createdSession },
+    } = await createUserSession({
       variables: { email, password },
     });
 
-    console.log(result);
+    dispatch(setSession(createdSession));
   });
 
   return (
