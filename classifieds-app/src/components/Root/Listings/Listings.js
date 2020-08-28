@@ -34,7 +34,7 @@ const query = gql`
 `;
 
 const Listings = () => {
-  const { data, loading } = useQuery(query);
+  const { data, loading, refetch } = useQuery(query);
 
   if (loading) return "Loading...";
 
@@ -48,7 +48,7 @@ const Listings = () => {
           </Listing>
         ))}
       </div>
-      <AddListing />
+      <AddListing onAddListing={() => refetch()} />
     </div>
   );
 };
